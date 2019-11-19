@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="874.0" prefWidth="1337.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <tabs>
+      <Tab fx:id="oneRouterId" text="One Router">
+         <content>
+            <SplitPane dividerPositions="0.16328331862312445" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="851.0" prefWidth="1310.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <ComboBox id="routerSelect" fx:id="routerSelect" layoutX="31.0" layoutY="303.0" prefWidth="150.0" promptText="Select Router" />
+                        <Button id="showStatsButton" fx:id="showStats" layoutX="69.0" layoutY="355.0" mnemonicParsing="false" onAction="#showStatsButtonClicked" text="Show Stats" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="41.0" prefHeight="848.0" prefWidth="1091.0" SplitPane.resizableWithParent="false">
+                     <children>
+                        <AreaChart id="inPacketGraph" fx:id="inputPacketGraph" layoutX="14.0" layoutY="55.0" prefHeight="351.0" prefWidth="533.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </AreaChart>
+                        <Label layoutX="504.0" layoutY="441.0" text="Speed [b/s]">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="489.0" layoutY="20.0" text="Packet Count">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <AreaChart id="outPacketGraph" fx:id="outputPacketGraph" layoutX="556.0" layoutY="52.0" prefHeight="351.0" prefWidth="522.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </AreaChart>
+                        <AreaChart id="inSpeedGraph" fx:id="inputSpeedGraph" layoutX="20.0" layoutY="478.0" prefHeight="351.0" prefWidth="533.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </AreaChart>
+                        <AreaChart id="outSpeedGraph" fx:id="outputSpeedGraph" layoutX="542.0" layoutY="478.0" prefHeight="351.0" prefWidth="533.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </AreaChart>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+         </content>
+      </Tab>
+      <Tab fx:id="allRouterId" text="All routers">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AreaChart fx:id="inputPacketGraphR1" layoutX="93.0" layoutY="56.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="outputPacketGraphR1" layoutX="394.0" layoutY="56.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="inputSpeedGraphR1" layoutX="728.0" layoutY="56.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="outputSpeedGraphR1" layoutX="1029.0" layoutY="56.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="inputPacketGraphR2" layoutX="93.0" layoutY="291.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="outputPacketGraphR2" layoutX="394.0" layoutY="291.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="inputSpeedGraphR2" layoutX="728.0" layoutY="291.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="outputSpeedGraphR2" layoutX="1029.0" layoutY="291.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="inputPacketGraphR3" layoutX="93.0" layoutY="526.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="outputPacketGraphR3" layoutX="394.0" layoutY="526.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="inputSpeedGraphR3" layoutX="728.0" layoutY="526.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <AreaChart fx:id="outputSpeedGraphR3" layoutX="1029.0" layoutY="526.0" prefHeight="235.0" prefWidth="294.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </AreaChart>
+                  <Label layoutX="376.0" layoutY="29.0" text="Packets">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="997.0" layoutY="29.0" text="Speed">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="147.0" text="Router 1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="395.0" text="Router 2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="630.0" text="Router 3">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
