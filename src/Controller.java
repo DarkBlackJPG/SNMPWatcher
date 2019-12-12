@@ -31,6 +31,15 @@ class DataInterpreter {
     private long outOctets;
     private long packetInCount;
     private long packetOutCount;
+    private long ifSpeed;
+
+    public long getIfSpeed() {
+        return ifSpeed;
+    }
+
+    public void setIfSpeed(long ifSpeed){
+        this.ifSpeed = ifSpeed;
+    }
 
     public long getPacketInCount() {
         return packetInCount;
@@ -111,6 +120,7 @@ class Socket {
                     dataListItem.setOutOctets(Long.parseLong(retPdu.getValueAt(i, 15).toString()));
                     dataListItem.setPacketInCount(Long.parseLong(retPdu.getValueAt(i, 10).toString()));
                     dataListItem.setPacketOutCount(Long.parseLong(retPdu.getValueAt(i, 16).toString()));
+                    dataListItem.setIfSpeed(Long.parseLong(retPdu.getValueAt(i, 4).toString()));
                     dataList.add(dataListItem);
                 }
             }
@@ -127,6 +137,15 @@ class InterfaceData {
     private long outOctets;
     private long packetInCount;
     private long packetOutCount;
+    private long ifSpeed;
+
+    public long getIfSpeed() {
+        return ifSpeed;
+    }
+
+    public void setIfSpeed(long ifSpeed){
+        this.ifSpeed = ifSpeed;
+    }
 
     public long getInOctets() {
         return inOctets;
@@ -277,6 +296,7 @@ class Router {
             interfaceData1.setOutOctets(dat.getOutOctets());
             interfaceData1.setPacketInCount(dat.getPacketInCount());
             interfaceData1.setPacketOutCount(dat.getPacketOutCount());
+            interfaceData1.setIfSpeed(dat.getIfSpeed());
 
             interfaceData.add(interfaceData1);
         }
@@ -306,6 +326,14 @@ abstract class Graph extends Observer{
     protected AreaChart chart;
     final protected CategoryAxis xAxis = new CategoryAxis();
     final protected NumberAxis yAxis = new NumberAxis();
+    private long time = 10;
+    public long getTime() {
+        return time;
+    }
+
+    public setTime(long time){
+        this.time = time;
+    }
     {
         xAxis.setLabel("Time/s");
         yAxis.setLabel("Value");
@@ -319,8 +347,8 @@ abstract class Graph extends Observer{
         return str;
     }
 
-    protected double getThrughput(long current, long previous){
-        return 8*((double)(current - previous))/10;
+    protected double getThrughput(long current, long previous, long speed){
+        return 8*((double)(current - previous))/(10*speed);
     }
 
 }
@@ -455,7 +483,9 @@ class InSpeedGraph extends Graph{
                     String secondsPast = formatSeconds((long) j * 10);
                     long currentOctets = dat.get(j).getData().get(i).getInOctets();
                     long previousOctets = dat.get(j-1).getData().get(i).getInOctets();
-                    double thrughput = getThrughput(currentOctets, previousOctets);
+                    long speed = dat.get(j - 1).getData().get(i).getIfSpeed();
+                    // long speed = 1;
+                    double thrughput = getThrughput(currentOctets, previousOctets, speed);
                     series.getData().add(new XYChart.Data(secondsPast, thrughput));
                 }
             }
@@ -510,7 +540,9 @@ class OutSpeedGraph extends Graph{
                     String secondsPast = formatSeconds((long) j * 10);
                     long currentOctets = dat.get(j).getData().get(i).getOutOctets();
                     long previousOctets = dat.get(j-1).getData().get(i).getOutOctets();
-                    double thrughput = getThrughput(currentOctets, previousOctets);
+                    long speed = dat.get(j - 1).getData().get(i).getIfSpeed();
+                    // long speed = 1;
+                    double thrughput = getThrughput(currentOctets, previousOctets, speed);
                     series.getData().add(new XYChart.Data(secondsPast, thrughput));
                 }
             }
