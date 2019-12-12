@@ -599,7 +599,7 @@ class Timer extends Thread {
         try {
             while (true) {
                 notifyRouters();
-                sleep(10000);
+                sleep(sleepInterval);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
