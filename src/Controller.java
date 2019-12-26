@@ -24,6 +24,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+class Constant {
+    public static final int seconds = 10;
+    public static final int timeout = 1000 * 10;
+}
+
 class DataInterpreter {
     private String interfaceName;
     private int interfaceId;
@@ -326,7 +332,7 @@ abstract class Graph extends Observer{
     protected AreaChart chart;
     final protected CategoryAxis xAxis = new CategoryAxis();
     final protected NumberAxis yAxis = new NumberAxis();
-    private long time = 10;
+    private long time = Constant.seconds;
     public long getTime() {
         return time;
     }
@@ -348,7 +354,7 @@ abstract class Graph extends Observer{
     }
 
     protected double getThrughput(long current, long previous, long speed){
-        return 8*((double)(current - previous))/(10*speed);
+        return 8*((double)(current - previous))/(Constant.seconds*speed);
     }
 
 }
@@ -382,7 +388,7 @@ class InPacketGraph extends Graph{
             series.setName(interfaces.get(i).getInterfaceName());
 
             for (int j = dat.size() - numberOfDataPoints; j < dat.size(); j++){
-                String secondsPast = formatSeconds((long)j*10);
+                String secondsPast = formatSeconds((long)j*Constant.seconds);
                 Long getPacketNumber = dat.get(j).getData().get(i).getPacketInCount();
                 series.getData().add(new XYChart.Data(secondsPast, getPacketNumber));
             }
@@ -429,7 +435,7 @@ class OutPacketGraph extends Graph{
             series.setName(interfaces.get(i).getInterfaceName());
 
             for (int j = dat.size() - numberOfDataPoints; j < dat.size(); j++){
-                String secondsPast = formatSeconds((long)j*10);
+                String secondsPast = formatSeconds((long)j*Constant.seconds);
                 long getPacketNumber = dat.get(j).getData().get(i).getPacketOutCount();
                 series.getData().add(new XYChart.Data(secondsPast, (int)getPacketNumber));
             }
@@ -480,7 +486,7 @@ class InSpeedGraph extends Graph{
                 if (numberOfDataPoints == 1){
                     series.getData().add(new XYChart.Data(formatSeconds(0), 0));
                 } else {
-                    String secondsPast = formatSeconds((long) j * 10);
+                    String secondsPast = formatSeconds((long) j * Constant.seconds);
                     long currentOctets = dat.get(j).getData().get(i).getInOctets();
                     long previousOctets = dat.get(j-1).getData().get(i).getInOctets();
                     long speed = dat.get(j - 1).getData().get(i).getIfSpeed();
@@ -537,7 +543,7 @@ class OutSpeedGraph extends Graph{
                 if (numberOfDataPoints == 1){
                     series.getData().add(new XYChart.Data(formatSeconds(0), 0));
                 } else {
-                    String secondsPast = formatSeconds((long) j * 10);
+                    String secondsPast = formatSeconds((long) j * Constant.seconds);
                     long currentOctets = dat.get(j).getData().get(i).getOutOctets();
                     long previousOctets = dat.get(j-1).getData().get(i).getOutOctets();
                     long speed = dat.get(j - 1).getData().get(i).getIfSpeed();
@@ -574,7 +580,7 @@ class Timer extends Thread {
         setDaemon(true);
     }
     public Timer(){
-        this(10000);
+        this(Constant.timeout);
     }
     private void notifyRouters(){
         for (Router r :
